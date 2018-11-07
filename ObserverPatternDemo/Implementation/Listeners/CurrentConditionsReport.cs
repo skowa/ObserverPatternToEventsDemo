@@ -8,26 +8,7 @@ namespace ObserverPatternDemo.Implementation.Listeners
     public class CurrentConditionsReport
     {
         private WeatherInfoEventArgs _currentWeatherInfo;
-
-        /// <summary>
-        /// Handles an event.
-        /// </summary>
-        /// <param name="sender">
-        /// The object that is to raised notifications.
-        /// </param>
-        /// <param name="info">
-        /// The current notification information.
-        /// </param>
-        public void Update(object sender, WeatherInfoEventArgs info)
-        {
-            if (sender == null)
-            {
-                throw new ArgumentNullException(nameof(sender));
-            }
-
-            _currentWeatherInfo = info?.Clone() ?? throw new ArgumentNullException(nameof(info));
-        }
-
+        
         /// <summary>
         /// The method that subscribes to the instance of <see cref="WeatherData"/>.
         /// </summary>
@@ -77,5 +58,7 @@ namespace ObserverPatternDemo.Implementation.Listeners
                 "Current conditions report: " + 
                 $"temperature is {_currentWeatherInfo.Temperature}, humidity is {_currentWeatherInfo.Humidity}, pressure is {_currentWeatherInfo.Pressure}";
         }
+
+        private void Update(object sender, WeatherInfoEventArgs info) => _currentWeatherInfo = info.Clone();
     }
 }

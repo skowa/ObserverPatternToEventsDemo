@@ -12,30 +12,6 @@ namespace ObserverPatternDemo.Implementation.Listeners
         private readonly List<WeatherInfoEventArgs> _weatherInfoList = new List<WeatherInfoEventArgs>();
 
         /// <summary>
-        /// Handles an event.
-        /// </summary>
-        /// <param name="sender">
-        /// The object that is to raised notifications.
-        /// </param>
-        /// <param name="info">
-        /// The current notification information.
-        /// </param>
-        public void Update(object sender, WeatherInfoEventArgs info)
-        {
-            if (sender == null)
-            {
-                throw new ArgumentNullException(nameof(sender));
-            }
-
-            if (info == null)
-            {
-                throw new ArgumentNullException(nameof(info));
-            }
-
-            _weatherInfoList.Add(info.Clone());
-        }
-
-        /// <summary>
         /// The method that subscribes to the instance of <see cref="WeatherData"/>.
         /// </summary>
         /// <param name="weatherData">
@@ -84,5 +60,7 @@ namespace ObserverPatternDemo.Implementation.Listeners
 
             return report.ToString();
         }
+
+        private void Update(object sender, WeatherInfoEventArgs info) => _weatherInfoList.Add(info.Clone());
     }
 }
